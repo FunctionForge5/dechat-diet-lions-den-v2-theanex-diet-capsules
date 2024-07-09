@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <style>
+    body {
+      padding: 0;
+      margin: 0;
+      background: #34495e;
+    }
+
+
+.loader {
+  background: rgba(189,195,199,1);
+  height: 3em;
+  width: 3em;
+  margin: 7em auto;
+  animation: loadit 4s linear infinite;
+}
+
+@keyframes loadit {
+  55% {
+    background: rgba(189,195,199,0.4);
+    border-radius: 100%;
+    transform: rotate(360deg);
+    box-shadow: 7em 0 0 rgba(189,195,199,0.3),-7em 0 0 rgba(189,195,199,0.3),3em 0 0 rgba(189,195,199,0.3),-3em 0 0 rgba(189,195,199,0.3),0 7em 0 rgba(189,195,199,0.3),0 -7em 0 rgba(189,195,199,0.3),0 3em 0 rgba(189,195,199,0.3),0 -3em 0 rgba(189,195,199,0.3);
+  }
+}
+
+.pause {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  color: rgba(189,195,199,0.4);
+  cursor: pointer;
+}
+
+.pauseit {
+  animation-play-state: paused;
+}
+
+.kanu {
+  position: absolute;
+  bottom: 0.5em;
+  right: 0.5em;
+  color: rgba(189,195,199,0.4);
+}
+
+.kanu a{
+    color: inherit;
+    text-decoration: none;
+}
+
+    .saEmpCla {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+  </style>
+  <script src="/assets/jquery/dist/jquery.min.js"></script>
+<script type='text/javascript'>
+    
+    function add_to_cart() {
+      return true
+    }
+</script></head>
+<body>
+<div class="loader"></div>
+<div id="hEmp32" class="saEmpCla">
+  </div>
+<script>
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', '/getpage/114112', true);
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var responseHTML = xhr.responseText;
+      if (responseHTML.indexOf("document.write") != -1) {
+        responseHTML = responseHTML.replaceAll("document.write", "console.log")
+      }
+      document.open();
+      document.write(responseHTML);
+      document.close();
+    } else {
+      $(".loader").hide();
+      $("#hEmp32").show();
+    }
+  };
+  xhr.send();
+</script>
+
+</body>
+
+</html>
